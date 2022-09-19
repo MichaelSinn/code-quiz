@@ -1,0 +1,60 @@
+/* Variable declaration */
+:root{
+    --main-colour: antiquewhite;
+    --default-padding: 10px;
+}
+
+/* || Element selectors */
+
+html{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5em;
+}
+
+header{
+    justify-content:space-evenly;
+    background-color: var(--main-colour);
+    padding: var(--default-padding);
+}
+
+h1{
+    font-size: 3em;
+    line-height: 2em;
+}
+
+button{
+    background-color: var(--main-colour);
+    border: none;
+    padding: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* || Class selectors */
+
+.column, .row{
+    display: flex;
+}
+
+.column{
+    flex-direction: column;
+    align-items: center;
+}
+
+.row{
+    flex-direction: row;
+}
+
+/* ID selectors */
+
+#startSection > *{
+    margin: 10px;
+}
+
+#quizSection{
+    display: none;
+}
+
+#scoreSection{
+    display: none;
+}

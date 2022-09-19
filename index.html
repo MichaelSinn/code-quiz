@@ -9,26 +9,27 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <a>Show high scores</a>
-        </nav>
+    <header class="row">
+        <div>High scores</div>
         <p>Time: <span id="timer"></span></p>
     </header>
 
-    <main>
+    <main class="column">
         <h1>Coding Quiz Challenge</h1>
-        <section id="startSection">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit ducimus doloribus corporis! Praesentium rerum tempora odio aperiam ullam optio voluptatum ratione culpa fuga consequuntur excepturi asperiores beatae velit, corporis nam!</p>
+        <section id="startSection" class="column">
+            <p>Test your coding knowledge!</p>
             <button id="startButton">Start Challenge</button>
         </section>
-        <section id="quizSection"> <!-- Questions -->
+        <section id="quizSection" class="column"> <!-- Questions -->
             <h2 id="question">Question</h2>
             <ul id="answers"> <!-- Answers -->
             </ul>
             <p id="result"></p> <!-- Result -->
         </section>
-        <section id="scoreSection"></section>
+        <section id="scoreSection" class="column">
+            <div>Your score: <span id="yourScore"></span></div>
+            <div>High score: <span id="highScore"></span></div>
+        </section>
     </main>
 
     <script src="./assets/js/main.js"></script>

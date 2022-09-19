@@ -26,19 +26,32 @@ function displayFinalScore(){
         name: "ms",
         score: score
     };
+    let yourScoreEl = document.getElementById("yourScore");
+    let highScoreEl = document.getElementById("highScore");
     currentHighScore = JSON.parse(localStorage.getItem("highscore"));
-    if (!currentHighScore || player.score > currentHighScore.score) localStorage.setItem("highscore", JSON.stringify(player));
+    yourScoreEl.textContent = player.score;
+    highScoreEl.textContent = currentHighScore.score;
+    if (!currentHighScore || player.score > currentHighScore.score){
+        localStorage.setItem("highscore", JSON.stringify(player));
+        highScoreEl.textContent = `${player.score} NEW HIGH SCORE!`;
+    } 
 }
 
 function writeQuestion(){
     let questionEl = document.getElementById("question");
+    let quizSectionEl = document.getElementById("quizSection");
+    let startSectionEl = document.getElementById("startSection");
+    quizSectionEl.setAttribute("style", "display: block");
+    startSectionEl.setAttribute("style", "display: none");
     if (currentQuestion < questions.length){
         questionEl.textContent = questions[currentQuestion].question;
         currentQuestion ++;
     }else {
+        let scoreSectionEl = document.getElementById("scoreSection");
+        scoreSectionEl.setAttribute("style", "display: block");
         displayFinalScore();
     }
 }
 
 startButton.addEventListener("click", writeQuestion);
-startTimer();
+//startTimer();
