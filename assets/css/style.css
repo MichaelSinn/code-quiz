@@ -57,7 +57,7 @@ button{
 }
 
 #quizSection{
-    /* display: none; */
+    display: none;
 }
 
 #answers li{
