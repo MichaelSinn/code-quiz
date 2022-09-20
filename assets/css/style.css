@@ -22,6 +22,11 @@ h1{
     line-height: 2em;
 }
 
+h2{
+    font-size: 2em;
+    line-height: 1.5em;
+}
+
 button{
     background-color: var(--main-colour);
     border: none;
@@ -52,7 +57,20 @@ button{
 }
 
 #quizSection{
-    display: none;
+    /* display: none; */
+}
+
+#answers li{
+    cursor: pointer;
+    background-color: pink;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 4px 10px;
+    margin: 5px;
+}
+
+#answers li:hover{
+    background-color: rgb(236, 155, 168);
 }
 
 #scoreSection{
