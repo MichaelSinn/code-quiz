@@ -9,26 +9,44 @@
     <title>Code Quiz</title>
 </head>
 <body>
-    <header class="row">
-        <div>High scores</div>
-        <p>Time: <span id="timer"></span></p>
+    <header class="column">
+        <h1>Coding Quiz Challenge</h1>
+        <h2>🕑 <span id="timer">60</span></h2>
     </header>
 
     <main class="column">
-        <h1>Coding Quiz Challenge</h1>
         <section id="startSection" class="column">
-            <p>Test your coding knowledge!</p>
+            <h2>Test your coding knowledge!</h2>
             <button id="startButton">Start Challenge</button>
+            <button id="highscoresButton">Highscores</button>
         </section>
-        <section id="quizSection" class="column"> <!-- Questions -->
+
+        <section id="quizSection" class="column">
             <h2 id="question">Question</h2>
             <ul id="answers">
+                <li>Answer 1</li>
+                <li>Answer 2</li>
+                <li>Answer 3</li>
+                <li>Answer 4</li>
             </ul>
-            <p id="result"></p> <!-- Result -->
+            <p id="result"></p>
         </section>
+
         <section id="scoreSection" class="column">
-            <div>Your score: <span id="yourScore"></span></div>
-            <div>High score: <span id="highScore"></span></div>
+            <h2>Your score: <span id="yourScore">0</span></h2>
+
+            <form class="column">
+                <div>
+                    <label for="initials">Input your initials</label>
+                    <input type="text" name="initials" id="initials" placeholder="Initials"></input>    
+                </div>
+                <button type="submit" id="saveButton">Save</button>
+            </form>
+        </section>
+
+        <section id="highscoreSection" class="column">
+            <div>High score: <span id="highscore">0</span> - <span id="highscoreInitials">-</span></div>
+            <button id="homeButton">Home</button>
         </section>
     </main>
 

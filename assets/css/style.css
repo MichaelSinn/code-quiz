@@ -1,6 +1,10 @@
 /* Variable declaration */
 :root{
-    --main-colour: antiquewhite;
+    --main-colour: #294a57;
+    --secondary-colour: #91AEC1;
+    --tertiary-colour: #BFD7EA;
+    --accent-colour: #0ea86b;
+    --secondary-accent-colour: #027442;
     --default-padding: 10px;
 }
 
@@ -8,13 +12,28 @@
 
 html{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--main-colour);
     line-height: 1.5em;
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 header{
     justify-content:space-evenly;
-    background-color: var(--main-colour);
+    background-color: var(--secondary-colour);
     padding: var(--default-padding);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
 }
 
 h1{
@@ -23,16 +42,38 @@ h1{
 }
 
 h2{
+    text-align: center;
     font-size: 2em;
     line-height: 1.5em;
 }
 
 button{
-    background-color: var(--main-colour);
+    background-color: var(--accent-colour);
     border: none;
+    border-radius: 10px;
     padding: 10px;
     font-size: 1.5em;
     cursor: pointer;
+}
+
+button:hover{
+    background-color: var(--secondary-accent-colour);
+    color: white;
+}
+
+form{
+    line-height: 4em;
+}
+
+form button{
+    padding: 5px 40px;
+}
+
+form input{
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--tertiary-colour);
 }
 
 /* || Class selectors */
@@ -54,6 +95,7 @@ button{
 
 #startSection > *{
     margin: 10px;
+    /* display: none; */
 }
 
 #quizSection{
@@ -62,7 +104,7 @@ button{
 
 #answers li{
     cursor: pointer;
-    background-color: pink;
+    background-color: var(--accent-colour);
     border: 1px solid black;
     border-radius: 6px;
     padding: 4px 10px;
@@ -70,9 +112,14 @@ button{
 }
 
 #answers li:hover{
-    background-color: rgb(236, 155, 168);
+    background-color: var(--secondary-accent-colour);
+    color: white;
 }
 
 #scoreSection{
+    display: none;
+}
+
+#highscoreSection{
     display: none;
 }

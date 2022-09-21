@@ -1,6 +1,10 @@
 /* 
 TODO
-    - Add top 5 scores to high scores
+    - Add top 5 scores to high scores (optional)
+    - Add a 0.5s delay after selecting the question before moving to the next one (optional)
+    - Have the header container either "High scores" or "Time" but not both
+    - Add styling to the page
+    - Wireframe
 */
 
 const questions = [
@@ -25,58 +29,76 @@ const questions = [
     answers: ["Console.log", "Console.sheep", "Console.stone", "Console.brick"],
   },
 ];
+
 const startButton = document.getElementById("startButton");
 const quizSectionEl = document.getElementById("quizSection");
 const startSectionEl = document.getElementById("startSection");
 const scoreSectionEl = document.getElementById("scoreSection");
+const scoreButtonEl = document.getElementById("saveButton");
+const highscoreSectionEl = document.getElementById("highscoreSection");
+const homeButtonEl = document.getElementById("homeButton");
+const highscoresEl = document.getElementById("highscoresAnchor");
 
-let timeRemaining = 20;
+let timeRemaining = 60;
 let currentQuestion = 0;
 let score = 0;
+let currentHighScore = JSON.parse(localStorage.getItem("highscore"));
 
-function startTimer() {
+function startTimer(maxTime) {
+  timeRemaining = maxTime;
   const timer = setInterval(function () {
+    const timerEl = document.getElementById("timer");
     timeRemaining--;
     if (timeRemaining <= 0) {
+      clearInterval(timer);
       timeRemaining = 0;
       finishQuiz();
-      clearInterval(timer);
     }
-    const timerEl = document.getElementById("timer");
     timerEl.textContent = timeRemaining;
   }, 1000);
 }
 
 function startQuiz() {
+  clearSections();
   quizSectionEl.setAttribute("style", "display: block");
-  startSectionEl.setAttribute("style", "display: none");
-
   score = 0;
-  startTimer();
+  startTimer(60);
   writeQuestion();
 }
 
 function finishQuiz() {
-  quizSectionEl.setAttribute("style", "display: none");
+  clearSections();
   scoreSectionEl.setAttribute("style", "display: block");
   displayFinalScore();
 }
 
+// Need to get the player's initials
 function displayFinalScore() {
-  let player = {
-    name: "ms",
-    score: score,
-  };
   const yourScoreEl = document.getElementById("yourScore");
-  const highScoreEl = document.getElementById("highScore");
-  currentHighScore = JSON.parse(localStorage.getItem("highscore"));
-  yourScoreEl.textContent = player.score;
-  if (!currentHighScore || player.score > currentHighScore.score) {
-    localStorage.setItem("highscore", JSON.stringify(player));
-    highScoreEl.textContent = `${player.score} NEW HIGH SCORE!`;
+  const highScoreEl = document.getElementById("highscore");
+  yourScoreEl.textContent = score;
+  if (!currentHighScore || score > currentHighScore.score) {
+    highScoreEl.textContent = `${score} NEW HIGH SCORE!`;
   } else {
     highScoreEl.textContent = currentHighScore.score;
   }
+}
+
+function clearSections(){
+  startSectionEl.setAttribute("style", "display: none");
+  scoreSectionEl.setAttribute("style", "display: none");
+  quizSectionEl.setAttribute("style", "display: none");
+  highscoreSectionEl.setAttribute("style", "display: none");
+}
+
+function showHighscore(){
+  clearSections();
+  highscoreSectionEl.setAttribute("style", "display: block");
+
+  let highscoreEl = document.getElementById("highscore");
+  let initialsEl = document.getElementById("highscoreInitials");
+  highscoreEl.textContent = currentHighScore.score;
+  initialsEl.textContent = currentHighScore.name;
 }
 
 function writeQuestion() {
@@ -100,6 +122,7 @@ function writeQuestion() {
     }
   } else {
     timeRemaining = 0;
+    currentQuestion = 0;
   }
 }
 
@@ -115,3 +138,22 @@ function selectAnswer(answer, questionIndex) {
 }
 
 startButton.addEventListener("click", startQuiz);
+scoreButtonEl.addEventListener("click", function(e){
+  e.preventDefault();
+  let player = {
+    name: document.getElementById("initials").value,
+    score: score
+  };
+  if (!currentHighScore || score > currentHighScore.score) {
+    localStorage.setItem("highscore", JSON.stringify(player));
+    currentHighScore = player;
+  }
+  showHighscore();
+});
+homeButtonEl.addEventListener("click", function(e){
+  e.preventDefault();
+  clearSections();
+  startSectionEl.setAttribute("style", "display: block");
+});
+
+// highscoresEl.addEventListener("click", showHighscore);
