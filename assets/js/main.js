@@ -1,32 +1,39 @@
 /* 
 TODO
     - Add top 5 scores to high scores (optional)
-    - Add a 0.5s delay after selecting the question before moving to the next one (optional)
-    - Have the header container either "High scores" or "Time" but not both
     - Add styling to the page
-    - Wireframe
+      - Colour the responses red or green
+      - Style the highscores page
 */
 
 const questions = [
   {
     question: "Commonly used data types do NOT include which",
     correctAnswer: "Books",
-    answers: ["Books", "Integers", "Strings", "Numbers"],
+    answers: ["Books", "Integers", "Strings", "Numbers"].sort(function(){
+      return 0.5 - Math.random()
+    })
   },
   {
     question: "To be defined, strings must be enclosed by what?",
     correctAnswer: "Quotes",
-    answers: ["Quotes", "Brackets", "Curly Brackets", "Integers"],
+    answers: ["Quotes", "Brackets", "Curly Brackets", "Integers"].sort(function(){
+      return 0.5 - Math.random()
+    })
   },
   {
     question: "What do arrays NOT store in JavaScript?",
     correctAnswer: "Mice",
-    answers: ["Mice", "Numbers", "Arrays", "Strings"],
+    answers: ["Mice", "Numbers", "Arrays", "Strings"].sort(function(){
+      return 0.5 - Math.random()
+    })
   },
   {
     question: "This is a useful tool for debugging in JavaScript",
     correctAnswer: "Console.log",
-    answers: ["Console.log", "Console.sheep", "Console.stone", "Console.brick"],
+    answers: ["Console.log", "Console.sheep", "Console.stone", "Console.brick"].sort(function(){
+      return 0.5 - Math.random()
+    })
   },
 ];
 
@@ -34,15 +41,23 @@ const startButton = document.getElementById("startButton");
 const quizSectionEl = document.getElementById("quizSection");
 const startSectionEl = document.getElementById("startSection");
 const scoreSectionEl = document.getElementById("scoreSection");
-const scoreButtonEl = document.getElementById("saveButton");
+const saveButtonEl = document.getElementById("saveButton");
 const highscoreSectionEl = document.getElementById("highscoreSection");
 const homeButtonEl = document.getElementById("homeButton");
 const highscoresEl = document.getElementById("highscoresAnchor");
+const highscoreButtonEl = document.getElementById("highscoreButton");
 
 let timeRemaining = 60;
 let currentQuestion = 0;
 let score = 0;
-let currentHighScore = JSON.parse(localStorage.getItem("highscore"));
+let currentHighScore = JSON.parse(localStorage.getItem("highscores"));
+
+if (!currentHighScore){
+  currentHighScore = {
+    scores: []
+  };
+  localStorage.setItem("highscores", JSON.stringify(currentHighScore));
+}
 
 function startTimer(maxTime) {
   timeRemaining = maxTime;
@@ -67,21 +82,10 @@ function startQuiz() {
 }
 
 function finishQuiz() {
+  const yourScoreEl = document.getElementById("yourScore");
   clearSections();
   scoreSectionEl.setAttribute("style", "display: block");
-  displayFinalScore();
-}
-
-// Need to get the player's initials
-function displayFinalScore() {
-  const yourScoreEl = document.getElementById("yourScore");
-  const highScoreEl = document.getElementById("highscore");
   yourScoreEl.textContent = score;
-  if (!currentHighScore || score > currentHighScore.score) {
-    highScoreEl.textContent = `${score} NEW HIGH SCORE!`;
-  } else {
-    highScoreEl.textContent = currentHighScore.score;
-  }
 }
 
 function clearSections(){
@@ -92,13 +96,17 @@ function clearSections(){
 }
 
 function showHighscore(){
+  const highscoreListEl = document.getElementById("highscoreList");
+  let highscores = JSON.parse(localStorage.getItem("highscores"));
   clearSections();
   highscoreSectionEl.setAttribute("style", "display: block");
+  highscoreListEl.innerHTML = "";
 
-  let highscoreEl = document.getElementById("highscore");
-  let initialsEl = document.getElementById("highscoreInitials");
-  highscoreEl.textContent = currentHighScore.score;
-  initialsEl.textContent = currentHighScore.name;
+  for (let i = 0; i < highscores.scores.length; i++){
+    let highscoreListItem = document.createElement("li");
+    highscoreListItem.textContent = `${highscores.scores[i].initials} - ${highscores.scores[i].score}`;
+    highscoreListEl.appendChild(highscoreListItem);
+  }
 }
 
 function writeQuestion() {
@@ -138,22 +146,25 @@ function selectAnswer(answer, questionIndex) {
 }
 
 startButton.addEventListener("click", startQuiz);
-scoreButtonEl.addEventListener("click", function(e){
+highscoreButtonEl.addEventListener("click", showHighscore);
+
+saveButtonEl.addEventListener("click", function(e){
   e.preventDefault();
+  let highscores = JSON.parse(localStorage.getItem("highscores"));
   let player = {
-    name: document.getElementById("initials").value,
+    initials: document.getElementById("initials").value,
     score: score
   };
-  if (!currentHighScore || score > currentHighScore.score) {
-    localStorage.setItem("highscore", JSON.stringify(player));
-    currentHighScore = player;
-  }
+  highscores.scores.push(player);
+  highscores.scores.sort(function(a, b){
+    return b.score - a.score;
+  });
+  if (highscores.scores.length >= 6) highscores.scores.pop();
+  localStorage.setItem("highscores", JSON.stringify(highscores));
   showHighscore();
 });
 homeButtonEl.addEventListener("click", function(e){
   e.preventDefault();
   clearSections();
-  startSectionEl.setAttribute("style", "display: block");
+  startSectionEl.setAttribute("style", "display: flex");
 });
-
-// highscoresEl.addEventListener("click", showHighscore);

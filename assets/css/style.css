@@ -121,5 +121,6 @@ form input{
 }
 
 #highscoreSection{
+    line-height: 4em;
     display: none;
 }
