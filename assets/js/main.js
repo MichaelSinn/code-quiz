@@ -5,7 +5,7 @@ const questions = [
     correctAnswer: "Books", // The correct answer
     answers: ["Books", "Integers", "Strings", "Numbers"].sort(function () { // All possible answers
       return 0.5 - Math.random(); // Randomizes the order of the questions each time the page is refreshed
-    }),
+    })
   },
   {
     question: "To be defined, strings must be enclosed by what?",
@@ -13,21 +13,21 @@ const questions = [
     answers: ["Quotes", "Brackets", "Curly Brackets", "Integers"].sort(function () {
         return 0.5 - Math.random();
       }
-    ),
+    )
   },
   {
     question: "What do arrays NOT store in JavaScript?",
     correctAnswer: "Mice",
     answers: ["Mice", "Numbers", "Arrays", "Strings"].sort(function () {
       return 0.5 - Math.random();
-    }),
+    })
   },
   {
     question: "This is a useful tool for debugging in JavaScript",
     correctAnswer: "Console.log",
     answers: ["Console.log", "Console.sheep", "Console.stone", "Console.brick",].sort(function () {
       return 0.5 - Math.random();
-    }),
+    })
   },
 ];
 
@@ -41,7 +41,7 @@ const highscoreSectionEl = document.getElementById("highscoreSection");
 const homeButtonEl = document.getElementById("homeButton");
 const highscoresEl = document.getElementById("highscoresAnchor");
 const highscoreButtonEl = document.getElementById("highscoreButton");
-const resultEl = document.getElementById("result"); // Gets the element where the result will be displayed
+const resultEl = document.getElementById("result");
 
 let timeRemaining = 60; // Set the remaining time in the quiz in seconds
 let currentQuestion = 0; // The current question that the quiz is showing
