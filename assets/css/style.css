@@ -95,11 +95,14 @@ form input{
 
 #startSection > *{
     margin: 10px;
-    /* display: none; */
 }
 
 #quizSection{
     display: none;
+}
+
+#result{
+    text-align: center;
 }
 
 #answers li{
@@ -121,6 +124,36 @@ form input{
 }
 
 #highscoreSection{
-    line-height: 4em;
+    line-height: 3em;
     display: none;
+}
+
+#highscoreSection ol{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#highscoreSection ol li{
+    border: #294a57 1px solid;
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+#highscoreSection ol li:first-child{
+    background-color: gold;
+    padding: 0 50px;
+}
+
+#highscoreSection ol li:nth-child(2){
+    background-color: rgb(211, 153, 114);
+    padding: 0 40px;
+}
+
+#highscoreSection ol li:nth-child(3){
+    background-color: rgb(189, 189, 189);
+    padding: 0 30px;
 }

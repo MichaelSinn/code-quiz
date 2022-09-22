@@ -1,11 +1,3 @@
-/* 
-TODO
-    - Add top 5 scores to high scores (optional)
-    - Add styling to the page
-      - Colour the responses red or green
-      - Style the highscores page
-*/
-
 const questions = [
   {
     question: "Commonly used data types do NOT include which",
@@ -84,7 +76,7 @@ function startQuiz() {
 function finishQuiz() {
   const yourScoreEl = document.getElementById("yourScore");
   clearSections();
-  scoreSectionEl.setAttribute("style", "display: block");
+  scoreSectionEl.setAttribute("style", "display: flex");
   yourScoreEl.textContent = score;
 }
 
@@ -99,12 +91,18 @@ function showHighscore(){
   const highscoreListEl = document.getElementById("highscoreList");
   let highscores = JSON.parse(localStorage.getItem("highscores"));
   clearSections();
-  highscoreSectionEl.setAttribute("style", "display: block");
+  highscoreSectionEl.setAttribute("style", "display: flex");
   highscoreListEl.innerHTML = "";
 
   for (let i = 0; i < highscores.scores.length; i++){
     let highscoreListItem = document.createElement("li");
     highscoreListItem.textContent = `${highscores.scores[i].initials} - ${highscores.scores[i].score}`;
+    highscoreListEl.appendChild(highscoreListItem);
+  }
+
+  if (highscores.scores.length === 0){
+    let highscoreListItem = document.createElement("li");
+    highscoreListItem.textContent = "No Highscores yet.";
     highscoreListEl.appendChild(highscoreListItem);
   }
 }
