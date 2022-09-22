@@ -10,7 +10,15 @@ No installation needed. Navigate to https://michaelsinn.github.io/code-quiz/ to 
 
 ## Usage
 
-In order at access the quiz, navigate to https://michaelsinn.github.io/code-quiz/ and press the "Start Challenge" button. Once the quiz has begun, you will have 60 seconds to answer all of the questions. Each question that is correctly answered will add 1 point to your final score. For each wrong question, 10 seconds will be deducted from  your timer. When either you have finished all questions or your timer reaches 0, the quiz will be over. You will be shown your score and have a chance to save your score along with your initials/name. You can also save your score anonymously by not including initials/name. To view the top 5 high scores, you can either save your score, or use the "Highscores" button on the home page.
+In order at access the quiz, navigate to https://michaelsinn.github.io/code-quiz/ and press the "Start Challenge" button.
+
+Once the quiz has begun, you will have 60 seconds to answer all of the questions. Each question that is correctly answered will add 1 point to your final score. For each wrong question, 10 seconds will be deducted from  your timer.
+
+When either you have finished all questions or your timer reaches 0, the quiz will be over. You will be shown your score and have a chance to save your score along with your initials/name. You can also save your score anonymously by not including initials/name.
+
+To view the top 5 high scores, you can either save your score, or use the "Highscores" button on the home page.
+
+For convenience, the page will remember your last input name/initials that you have entered for you highscore.
 
 ![A screenshot of the homepage of the quiz](assets/images/screenshot2.png)
 ![A screenshot of the highscores page of the quiz](assets/images/screenshot1.png)
